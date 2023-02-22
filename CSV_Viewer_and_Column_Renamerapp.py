@@ -202,17 +202,21 @@ if uploaded_file is not None:
     # Rename the selected columns
     df = df.rename(columns=new_names)
 
-    # Get the position where the user wants to add the new column
-    new_column_position = st.slider("Select position for new column", 0, len(df.columns), len(df.columns))
+    # Check if the user wants to add a new column
+    add_new_column = st.checkbox("Add a new column")
 
-    # Get the name of the new column
-    new_column_name = st.text_input("Enter name of new column")
+    if add_new_column:
+        # Get the position where the user wants to add the new column
+        new_column_position = st.slider("Select position for new column", 0, len(df.columns), len(df.columns))
 
-    # Get the value to fill the new column
-    new_column_value = st.text_input("Enter value for new column")
+        # Get the name of the new column
+        new_column_name = st.text_input("Enter name of new column")
 
-    # Insert the new column at the specified position
-    df.insert(new_column_position, new_column_name, new_column_value)
+        # Get the value to fill the new column
+        new_column_value = st.text_input("Enter value for new column")
+
+        # Insert the new column at the specified position
+        df.insert(new_column_position, new_column_name, new_column_value)
 
     # Get the column names the user wants to remove
     columns_to_remove = st.multiselect("Select columns to remove", df.columns)
